@@ -14,21 +14,46 @@ rectangle "InterIIT Management system" {
 (Update \nScoreboard) as cscore
 (Change \n Schedule) as cschedule
 (Reset \n Credentials) as reset
-player -- plogin
+(Submit \nComplaints) as scomp
+(Address \n Complaints) as acomp
+(Notifications) as notification
+(View \nNotifications) as viewnotify
+(Request \nfor Kit) as rkit
+(Address Kit\nRequests) as akit
+(Apply for \nMedical/\nTravel allowance) as rallo
+(Address \nAllowance requests) as aallo
 org -- ologin
+player -- plogin
 tm -- tlogin
+plogin ..> viewnotify : "<<include>>"
 plogin ..> auth: "<<include>>"
 reset ..> plogin : "<<extend>>"
 vschedule ..> plogin : "<<extend>>"
 vscore ..> plogin : "<<extend>>"
+rkit ..> plogin : "<<extend>>"
+rallo ..> plogin : "<<extend>>"
+tlogin ..> viewnotify : "<<include>>"
 tlogin ..> auth : "<<include>>"
 reset ..> tlogin : "<<extend>>"
+scomp ..> tlogin : "<<extend>>"
 reset ..> auth : "<<include>>"
+ologin ..> viewnotify : "<<include>>"
 ologin ..> auth : "<<include>>"
 reset ..> ologin : "<<extend>>"
 vschedule ..> ologin : "<<extend>>"
 vscore ..> ologin : "<<extend>>"
 cschedule ..> ologin : "<<extend>>"
 cscore ..> ologin : "<<extend>>"
+ologin <.. acomp : "<<extend>>"
+ologin <.. akit : "<<extend>>"
+ologin <.. aallo : "<<extend>>"
+acomp ..> notification : "<<include>>"
+akit ..> notification : "<<include>>"
+aallo ..> notification : "<<include>>"
+scomp ..> notification : "<<include>>"
+rkit ..> notification : "<<include>>"
+rallo ..> notification : "<<include>>"
+viewnotify ..> notification : "<<include>>"
+
 }
 @enduml
